@@ -13,24 +13,17 @@ class DataInterface(pl.LightningDataModule):
         
         self.train_dataset = None
         self.val_dataset = None
-        self.test_dataset = None
-
+    
     def setup(self, stage=None):
         # 2. 로드된 클래스를 인스턴스화
         if stage == 'fit' or stage is None:
             self.train_dataset = self.dataset_class(
                 data_path=self.hparams.train_data_path,
-                transform=None # 필요 시 utils에서 transform도 동적 로드 가능
+                label_path=self.hparams.train_label_path,
             )
             self.val_dataset = self.dataset_class(
                 data_path=self.hparams.val_data_path,
-                transform=None
-            )
-
-        if stage == 'test' or stage is None:
-            self.test_dataset = self.dataset_class(
-                data_path=self.hparams.test_data_path,
-                transform=None
+                label_path=self.hparams.val_label_path,
             )
 
     def train_dataloader(self):
@@ -49,4 +42,3 @@ class DataInterface(pl.LightningDataModule):
             shuffle=False
         )
     
-    # test_dataloader 생략 (동일한 방식)

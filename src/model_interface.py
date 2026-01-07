@@ -21,14 +21,16 @@ class ModelInterface(pl.LightningModule):
 
     def training_step(self, batch, batch_idx):
         """
-        Main training logic: forward pass + loss calculation
+        batch: (inputs, targets)
+        inputs: (Batch, Height, Width) = (Batch, 28, 28)
+        targets: (Batch, Num_Classes)
         """
         x, y = batch
         out = self(x)
         loss = self.loss_function(out, y)
         
         # Logging metrics
-        acc = (out.argmax(dim=1) == y).float().mean()
+        acc = (out.argmax(dim=1) == y.argmax(dim=1)).float().mean()
         self.log('train_loss', loss, on_step=False, on_epoch=True, prog_bar=True)
         self.log('train_acc', acc, on_step=False, on_epoch=True, prog_bar=True)
         
@@ -43,7 +45,7 @@ class ModelInterface(pl.LightningModule):
         loss = self.loss_function(out, y)
         
         # Calculate accuracy
-        acc = (out.argmax(dim=1) == y).float().mean()
+        acc = (out.argmax(dim=1) == y.argmax(dim=1)).float().mean()
         
         # Log metrics (Lightning automatically averages these over the epoch)
         self.log('val_loss', loss, on_epoch=True, prog_bar=True)

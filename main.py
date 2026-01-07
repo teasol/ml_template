@@ -28,7 +28,7 @@ def main(args):
     model_system = ModelInterface(**config['model_params'])
 
     # 5. 로거 및 콜백 설정 (학습 모니터링)
-    logger = [TensorBoardLogger("tb_logs", name=config['exp_name']), WandbLogger(project=config['exp_name'])]
+    logger = [TensorBoardLogger("tb_logs", name=config['exp_name'])]
     
     checkpoint_callback = ModelCheckpoint(
         monitor='val_loss',
@@ -58,7 +58,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="ML Training Template")
-    parser.add_argument('--config', type=str, default='configs/config.yaml', help='Path to config file')
+    parser.add_argument('--config', type=str, default='config/config.yaml', help='Path to config file')
     parser.add_argument('--seed', type=int, default=42, help='Random seed')
     parser.add_argument('--fp16', action='store_true', help='Use mixed precision training')
     
