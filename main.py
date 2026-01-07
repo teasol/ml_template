@@ -1,9 +1,9 @@
 import os
 import yaml
 import argparse
-from pytorch_lightning import Trainer, seed_everything
-from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
-from pytorch_lightning.loggers import TensorBoardLogger, WandbLogger
+from lightning import Trainer, seed_everything
+from lightning.pytorch.callbacks import ModelCheckpoint, EarlyStopping
+from lightning.pytorch.loggers import TensorBoardLogger, WandbLogger
 
 from src.data_interface import DataInterface
 from src.model_interface import ModelInterface

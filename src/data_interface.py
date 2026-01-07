@@ -1,4 +1,4 @@
-import pytorch_lightning as pl
+import lightning as pl
 from torch.utils.data import DataLoader
 from src.utils.utils import load_class # 유틸리티 함수 임포트
 

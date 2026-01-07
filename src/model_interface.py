@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-import pytorch_lightning as pl
+import lightning as pl
 from src.utils.utils import load_class
 
 class ModelInterface(pl.LightningModule):
@@ -26,6 +26,7 @@ class ModelInterface(pl.LightningModule):
         targets: (Batch, Num_Classes)
         """
         x, y = batch
+        x = x.float() / 255.0
         out = self(x)
         loss = self.loss_function(out, y)
         
@@ -41,6 +42,7 @@ class ModelInterface(pl.LightningModule):
         Main validation logic: evaluation and metrics
         """
         x, y = batch
+        x = x.float() / 255.0
         out = self(x)
         loss = self.loss_function(out, y)
         
