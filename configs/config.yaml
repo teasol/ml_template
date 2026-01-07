@@ -1,0 +1,23 @@
+exp_name: "my_first_experiment"
+
+# ModelInterface 및 MyModel에 전달될 인자
+model_params:
+  model_name: "my_model.MyModel"
+  loss_name: "ce"
+  lr: 0.001
+  input_dim: 784     # MyModel.__init__ 으로 전달됨
+  hidden_dim: 256    # MyModel.__init__ 으로 전달됨
+  num_classes: 10    # MyModel.__init__ 으로 전달됨
+
+# DataInterface 및 MyDataset에 전달될 인자
+data_params:
+  dataset_name: "my_dataset.MyDataset"
+  batch_size: 64
+  num_workers: 4
+  train_data_path: "./data/train"
+  val_data_path: "./data/val"
+  test_data_path: "./data/test"
+
+# Trainer 설정
+trainer_params:
+  max_epochs: 20
